@@ -1,5 +1,6 @@
 package com.example.tictactoefixed
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -28,10 +29,9 @@ class MainActivity2 : AppCompatActivity(), View.OnClickListener {
     private var activePlayer = 1
     private var firstPlayer = ArrayList<Int>()
     private var secondPlayer = ArrayList<Int>()
-    private var score1st = ArrayList<String>()
-    private var score2nd = ArrayList<String>()
     private var firstPlayerScore = ArrayList<Int>()
     private var secondPlayerScore = ArrayList<Int>()
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
@@ -97,7 +97,7 @@ class MainActivity2 : AppCompatActivity(), View.OnClickListener {
                 R.id.button10 -> buttonNumber = 0
                 R.id.button11 -> buttonNumber = -1
             }
-            if (buttonNumber != 0) {
+            if (buttonNumber > 0) {
                 playGame(clickedView, buttonNumber)
             }
             if (buttonNumber == 0){
@@ -120,6 +120,7 @@ class MainActivity2 : AppCompatActivity(), View.OnClickListener {
                 butt7.isEnabled = true
                 butt8.isEnabled = true
                 butt9.isEnabled = true
+                butt10.isEnabled = true
                 butt.setBackgroundColor(Color.CYAN)
                 butt1.setBackgroundColor(Color.CYAN)
                 butt2.setBackgroundColor(Color.CYAN)
@@ -153,6 +154,7 @@ class MainActivity2 : AppCompatActivity(), View.OnClickListener {
                 butt7.isEnabled = true
                 butt8.isEnabled = true
                 butt9.isEnabled = true
+                butt10.isEnabled = true
                 butt.setBackgroundColor(Color.CYAN)
                 butt1.setBackgroundColor(Color.CYAN)
                 butt2.setBackgroundColor(Color.CYAN)
@@ -193,8 +195,8 @@ class MainActivity2 : AppCompatActivity(), View.OnClickListener {
     private fun check(){
         firstPlayerScore.add(0)
         secondPlayerScore.add(0)
-        var Score = firstPlayerScore
-        var Sscore = secondPlayerScore
+        val ssscore = firstPlayerScore
+        val sscore = secondPlayerScore
 
 
         var winnerPlayer = 0
@@ -247,16 +249,17 @@ class MainActivity2 : AppCompatActivity(), View.OnClickListener {
             winnerPlayer = 2
         }
         if (winnerPlayer == 1){
-            Toast.makeText(this,"1st won",Toast.LENGTH_LONG).show()
-            Score[0]+=1
-            score1.text = Score[0].toString()
+            Toast.makeText(this,"1st won",Toast.LENGTH_SHORT).show()
+            ssscore[0]+=1
+            score1.text = ssscore[0].toString()
         }
         if (winnerPlayer == 2){
-            Sscore[0]+=1
-            score2.text = Sscore[0].toString()
-            Toast.makeText(this,"2nd won",Toast.LENGTH_LONG).show()
+            sscore[0]+=1
+            score2.text = sscore[0].toString()
+            Toast.makeText(this,"2nd won",Toast.LENGTH_SHORT).show()
         }
         if (firstPlayer.size + secondPlayer.size == 9 && winnerPlayer == 0){
+
             Toast.makeText(this,"tie",Toast.LENGTH_SHORT).show()
         }
         if(winnerPlayer != 0){
@@ -271,8 +274,4 @@ class MainActivity2 : AppCompatActivity(), View.OnClickListener {
             butt8.isEnabled = false
         }
     }
-}
-
-private operator fun <E> ArrayList<E>.set(i: Int, value: Int) {
-
 }
